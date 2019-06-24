@@ -1,0 +1,14 @@
+  spring:
+    application:
+      name: config-server
+    cloud:
+      config:
+        server:
+          git:
+            uri: https://github.com/liupandeng/SpringCloudLearningAll
+  #          search-paths: repo
+            username: liupandeng
+            password: woaixiaowei888
+
+  server:
+    port: 1201
