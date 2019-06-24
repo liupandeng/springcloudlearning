@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <property name="LOG_HOME" value="E:\\workspaces\\AllIdeaSpace\\study\\logger"/>
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p})  %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %line %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+    <!--property 用来定义变量值,“${}”来使用变量-->
+    <property name="APP_Name" value="Study" />
+    <!--contextName 用来设置上下文名称,用于区分不同应用程序的记录-->
+    <contextName>${APP_Name}</contextName>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!--encoder 对日志进行格式化-->
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <target>
+            INFO
+        </target>
+    </appender>
+
+  <!--  滚动文件的策略，每分钟生成一个日志文件
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/logFile.log</file>
+        <append>true</append> &lt;!&ndash;如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true&ndash;&gt;
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/logFile.%d{yyyy-MM-dd-HH-mm}.log</fileNamePattern>
+            &lt;!&ndash;假设设置每个月滚动，且<maxHistory>是6，则只保存最近6个月的文件，删除之前的旧文件
+            此处表示每分生成一个日志文件，保存30分钟的日志文件&ndash;&gt;
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>-->
+    <!--另一种滚动文件的策略，每1KB生成一个日志文件-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/test.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/test.%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>3</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>1KB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <!--把>=INFO级别的日志都输出到控制台　　logger的有效级别为INFO 　 -->
+    <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
