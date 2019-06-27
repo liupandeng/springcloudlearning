@@ -1,9 +1,9 @@
 package com.springcloud.eurekaclient.controller;
 
+import com.springcloud.eurekaclient.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class DcController {
@@ -19,4 +19,17 @@ public class DcController {
         return services;
     }
 
+    @GetMapping("/hello1")
+    public String hello(@RequestParam String name){
+        return "RequestParam: hello "+name;
+    }
+
+    @GetMapping("/hello2")
+    public User hello(@RequestHeader String name,@RequestHeader Integer age){
+        return new User(name,age);
+    }
+    @PostMapping("/hello3")
+    public String hello(@RequestBody User user){
+        return "RequestBody: hello " + user.getName()+","+user.getAge();
+    }
 }
