@@ -13,4 +13,13 @@ public class DcController {
     public String dc(){
         return dcClient.consumer();
     }
+
+    @GetMapping("/feign-consumer")
+    public String helloConsumer(){
+        StringBuilder bf = new StringBuilder();
+        bf.append(dcClient.hello("lpd")).append("\n");
+        bf.append(dcClient.hello("liwei",18)).append("\n");
+        bf.append(dcClient.hello(new User("niannian",2))).append("\n");
+        return bf.toString();
+    }
 }
