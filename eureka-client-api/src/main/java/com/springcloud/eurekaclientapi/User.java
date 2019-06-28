@@ -1,4 +1,4 @@
-package com.springcloud.eurekaclient.pojo;
+package com.springcloud.eurekaclientapi;
 
 
 public class User {
