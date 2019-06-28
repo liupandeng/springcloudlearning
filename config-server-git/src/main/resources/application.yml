@@ -6,9 +6,9 @@
         server:
           git:
             uri: https://github.com/liupandeng/SpringCloudLearningAll
-  #          search-paths: repo
+  #          search-paths: dev
             username: liupandeng
-            password: woaixiaowei888
+            password: XXXXXX
 
   server:
     port: 1201
