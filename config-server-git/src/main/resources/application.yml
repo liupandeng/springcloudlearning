@@ -1,14 +1,17 @@
-  spring:
-    application:
-      name: config-server
-    cloud:
-      config:
-        server:
-          git:
-            uri: https://github.com/liupandeng/SpringCloudLearningAll
-  #          search-paths: dev
-            username: liupandeng
-            password: XXXXXX
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://git.oschina.net/didispace/config-repo-demo/
+          basedir: @project.artifactId@/config-repo #默认存到/tmp目录下，但linux的/tmp目录可能会因为某种原因删除，所以定位配置当当前目录下
+          force-pull: true #强制每次都到git去拉取配置，不管本地是否存在
+#          search-paths: repo
+#          username:
+#          password:
 
-  server:
-    port: 1201
+
+server:
+  port: 1201
