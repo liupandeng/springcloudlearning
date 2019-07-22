@@ -24,7 +24,7 @@ public class DcController {
 
         @HystrixCommand(fallbackMethod = "fallback")
         public String consumer(){
-            return restTemplate.getForObject("http://eureka-client/dc",String.class);
+            return restTemplate.getForObject("http://eureka-client-2/dc",String.class);
         }
 
         public String fallback(){
