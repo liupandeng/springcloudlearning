@@ -17,7 +17,7 @@ public class DcController {
     @GetMapping("/consumer")
     public String dc(){
         ServiceInstance serviceInstance = loadBalancerClient.choose("eureka-client");
-        String url="http://"+serviceInstance.getHost()+":"+serviceInstance.getPort()+ "/dc";
+        String url="http://"+serviceInstance.getHost()+":"+serviceInstance.getPort()+ "/helloclient/dc";
         System.out.println(url);
         return restTemplate.getForObject(url,String.class);
     }
