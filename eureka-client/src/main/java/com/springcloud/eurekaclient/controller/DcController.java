@@ -4,6 +4,8 @@ import com.springcloud.eurekaclientapi.User;
 import com.springcloud.eurekaclientapi.HelloClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,12 +27,12 @@ public class DcController implements HelloClient {
     }
 
     @Override
-    public User hello(String name, Integer age) {
+    public User hello(@RequestHeader("name") String name, @RequestHeader("age") Integer age) {
         return new User(name,age);
     }
 
     @Override
-    public String hello(User user) {
+    public String hello(@RequestBody User user) {
         return "RequestBody: hello " + user.getName()+","+user.getAge();
     }
 
